@@ -1,0 +1,14 @@
+import { NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
+ 
+export function middleware(request: NextRequest) {
+    const getUserRole = request.cookies.get('role')
+    console.log('getUserRole', getUserRole)
+
+
+    console.log('nextrequesturl', request.url)
+
+    if( getUserRole?.value == 'student' && request.url.includes('/admin') ){
+        return NextResponse.redirect('http://localhost:3001/user')
+    }
+}
